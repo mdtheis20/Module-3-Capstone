@@ -9,13 +9,17 @@ using TenmoServer.Security;
 
 namespace TenmoServer.DAO
 {
-    public class AccountSqlDAO
+    public class AccountSqlDAO : IAccountDAO
     {
-        private readonly string connectionStrings;
+        private readonly string connectionString;
         const decimal startingBalance = 1000;
         public AccountSqlDAO(string dbConnectionString)
         {
-            connectionStrings = dbConnectionString;
+            connectionString = dbConnectionString;
+        }
+
+        public AccountSqlDAO()
+        {
         }
 
         public Account GetAccount(int accountId)
@@ -23,7 +27,7 @@ namespace TenmoServer.DAO
             Account obj = null;
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionStrings))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
@@ -46,12 +50,12 @@ namespace TenmoServer.DAO
             return obj;
         }
 
-        public Account GetBalanceByAccount(string username)
+        public Account GetAccountByName(string username)
         {
             Account obj = null;
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionStrings))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TenmoServer.DAO;
+using TenmoServer.Models;
 
 namespace TenmoServer.Controllers
 {
@@ -12,13 +14,22 @@ namespace TenmoServer.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        [HttpGet]
-        [Authorize]
+        private readonly IAccountDAO _dao;
 
-        public ActionResult<List<AccountController>> GetAccounts()
+        public AccountController(IAccountDAO accountDao = null)
         {
-            string name = User.Identity.Name;
-            return null;
+            if (accountDao == null)
+                _dao = new AccountSqlDAO();
+            else
+                _dao = accountDao;
+        }
+        
+
+        [HttpGet]
+        public IActionResult GetCurrentAccountBalance()
+        {
+            Account a = _dao.GetAccountByName(User.Identity.Name);
+            return Ok(a.Balance);
         }
     }
 }
