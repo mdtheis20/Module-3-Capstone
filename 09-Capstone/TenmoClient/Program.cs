@@ -95,6 +95,7 @@ namespace TenmoClient
                 }
                 else if (menuSelection == 1)
                 {
+                   // AccountSqlDAO.GetBalanceByAccount();
                     // View your current balance
 
                 }
