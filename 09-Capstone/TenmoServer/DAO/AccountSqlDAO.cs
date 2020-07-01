@@ -12,17 +12,14 @@ namespace TenmoServer.DAO
     public class AccountSqlDAO : IAccountDAO
     {
         private readonly string connectionString;
-        const decimal startingBalance = 1000;
+        //const decimal startingBalance = 1000;
         public AccountSqlDAO(string dbConnectionString)
         {
             connectionString = dbConnectionString;
         }
 
-        //public AccountSqlDAO()
-        //{
-        //}
 
-        public Account GetAccount(int accountId)
+        public Account GetAccount(string username)
         {
             Account obj = null;
             try
@@ -31,8 +28,8 @@ namespace TenmoServer.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("select account_id accounts a join users on users.user_id = a.user_id where account_id = @account_id", conn);
-                    cmd.Parameters.AddWithValue("@account_id", accountId);
+                    SqlCommand cmd = new SqlCommand("select * from accounts a join users on users.user_id = a.user_id where username = @username", conn);
+                    cmd.Parameters.AddWithValue("@username", username);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.HasRows && reader.Read())
@@ -50,32 +47,32 @@ namespace TenmoServer.DAO
             return obj;
         }
 
-        public Account GetAccountByName(string username)
-        {
-            Account obj = null;
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
+        //public Account GetAccountByName(string username)
+        //{
+        //    Account obj = null;
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connectionString))
+        //        {
+        //            conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("select * from accounts a join users on users.user_id = a.user_id where username = @username", conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    SqlDataReader reader = cmd.ExecuteReader();
+        //            SqlCommand cmd = new SqlCommand("select * from accounts a join users on users.user_id = a.user_id where username = @username", conn);
+        //            cmd.Parameters.AddWithValue("@username", username);
+        //            SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows && reader.Read())
-                    {                     
-                        obj = RowToObject(reader);
-                    }
-                }
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
+        //            if (reader.HasRows && reader.Read())
+        //            {                     
+        //                obj = RowToObject(reader);
+        //            }
+        //        }
+        //    }
+        //    catch (SqlException)
+        //    {
+        //        throw;
+        //    }
 
-            return obj;
-        }
+        //    return obj;
+        //}
 
 
 

@@ -95,7 +95,9 @@ namespace TenmoClient
                 }
                 else if (menuSelection == 1)
                 {
-                   // AccountSqlDAO.GetBalanceByAccount();
+                    Decimal Balance = authService.GetAccount()
+
+                    
                     // View your current balance
 
                 }

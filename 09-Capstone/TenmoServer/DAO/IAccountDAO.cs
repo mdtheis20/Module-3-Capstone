@@ -5,8 +5,8 @@ namespace TenmoServer.DAO
 {
     public interface IAccountDAO
     {
-        Account GetAccount(int accountId);
-        Account GetAccountByName(string username);
+        Account GetAccount(string username);
+        //Account GetAccountByName(string username);
         
         
     }
