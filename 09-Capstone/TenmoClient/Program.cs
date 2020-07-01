@@ -95,7 +95,11 @@ namespace TenmoClient
                 }
                 else if (menuSelection == 1)
                 {
-                    Decimal Balance = authService.GetAccount()
+                    Account balance = authService.GetBalanceForAccount(username);
+                    if (balance != null)
+                    {
+                        Console.WriteLine($"{balance}");
+                    }
 
                     
                     // View your current balance
