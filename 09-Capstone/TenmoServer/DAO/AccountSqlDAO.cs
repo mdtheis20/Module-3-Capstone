@@ -18,9 +18,9 @@ namespace TenmoServer.DAO
             connectionString = dbConnectionString;
         }
 
-        public AccountSqlDAO()
-        {
-        }
+        //public AccountSqlDAO()
+        //{
+        //}
 
         public Account GetAccount(int accountId)
         {
@@ -59,7 +59,7 @@ namespace TenmoServer.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("select balance from accounts a join users on users.user_id = a.user_id where username = @username", conn);
+                    SqlCommand cmd = new SqlCommand("select * from accounts a join users on users.user_id = a.user_id where username = @username", conn);
                     cmd.Parameters.AddWithValue("@username", username);
                     SqlDataReader reader = cmd.ExecuteReader();
 
