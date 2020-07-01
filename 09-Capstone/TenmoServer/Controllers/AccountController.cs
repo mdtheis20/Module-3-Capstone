@@ -24,10 +24,11 @@ namespace TenmoServer.Controllers
         
 
         [HttpGet]
+        
         public IActionResult GetCurrentAccountBalance()
         {
             Account a = dao.GetAccount(User.Identity.Name);
-            return Ok(a.Balance);
+            return Ok(a);
         }
     }
 }

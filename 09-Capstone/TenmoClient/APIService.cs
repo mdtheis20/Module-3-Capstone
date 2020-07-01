@@ -13,11 +13,11 @@ namespace TenmoClient
         private readonly IRestClient client = new RestClient();
         private static API_User user = new API_User();
 
-        public APIService(string baseUrl, string token)
-        {
-            client = new RestClient(baseUrl);
-            client.Authenticator = new JwtAuthenticator(token);
-        }
+        //public APIService(string baseUrl, string token)
+        //{
+        //    client = new RestClient(baseUrl);
+        //    client.Authenticator = new JwtAuthenticator(token);
+        //}
 
         public APIService()
         {
@@ -34,6 +34,7 @@ namespace TenmoClient
         public Account GetBalanceForAccount()
         {
             RestRequest requestOne = new RestRequest(ACCOUNTS_URL);
+            client.Authenticator = new JwtAuthenticator(UserService.GetToken());
             IRestResponse<Account> response = client.Get<Account>(requestOne);
 
             if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)
