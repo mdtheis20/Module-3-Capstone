@@ -20,26 +20,26 @@ namespace TenmoServer.DAO
         }
 
 
-        public void CreateTransfer(int accountFromId, int accountToId, decimal amount)
+        public Transfer CreateTransfer(Transfer transfer)
         {
-            Account obj = null;
+            
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+                    const string QUERY = "Update accounts set balance = balance - @amount where account_id = @accountFrom Update accounts Set balance = balance + @amount where account_id = @accountTo insert into transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) values(@type, @status, @accountFrom, @accountTo, @amount) Select @@IDENTITY";
 
-                    SqlCommand cmd = new SqlCommand("insert into transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) values(2, 2, @account_from, @account_to, @amount)", conn);
-                    cmd.Parameters.AddWithValue("@account_from ", accountFromId);
-                    cmd.Parameters.AddWithValue("@account_to ", accountToId);
-                    cmd.Parameters.AddWithValue("@amount ", amount);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                        
 
-                    cmd.ExecuteNonQuery();
-
-                   cmd = new SqlCommand()
-
-                   
+                    SqlCommand cmd = new SqlCommand(QUERY, conn);
+                    cmd.Parameters.AddWithValue("@accountFrom ", transfer.AccountFrom);
+                    cmd.Parameters.AddWithValue("@accounTo ", transfer.AccountTo);
+                    cmd.Parameters.AddWithValue("@amount ", transfer.Amount);
+                    cmd.Parameters.AddWithValue("@type ", transfer.TransferTypeId);
+                    cmd.Parameters.AddWithValue("@status ", transfer.TransferStatusId);
+                    transfer.TransferId = Convert.ToInt32(cmd.ExecuteScalar());
+                    return transfer;
                 }
             }
             catch (SqlException)
@@ -47,8 +47,7 @@ namespace TenmoServer.DAO
                 throw;
             }
 
-            //return obj;
-            //    
+
         }
     }
 }
