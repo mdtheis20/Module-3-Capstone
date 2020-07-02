@@ -12,7 +12,7 @@ namespace TenmoClient
         private readonly static string API_BASE_URL = "https://localhost:44315/";
         private readonly static string ACCOUNTS_URL = API_BASE_URL + "account";
         private readonly static string USERS_URL = ACCOUNTS_URL + "/" + "user";
-        private readonly static string TRANSFER_URL = ACCOUNTS_URL + "/" + "transfer";
+        private readonly static string TRANSFER_URL = API_BASE_URL + "/" + "transfers";
         private readonly IRestClient client = new RestClient();
         private static API_User user = new API_User();
 
@@ -56,6 +56,42 @@ namespace TenmoClient
             RestRequest requestOne = new RestRequest(USERS_URL);
             client.Authenticator = new JwtAuthenticator(UserService.GetToken());
             IRestResponse<List<User>> response = client.Get<List<User>>(requestOne);
+
+            if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)
+            {
+                ProcessErrorResponse(response);
+            }
+            else
+            {
+                return response.Data;
+            }
+            return response.Data;
+
+        }
+
+        public Transfer AddTransfer(NewTransfer newTransfer)
+        {
+            
+            client.Authenticator = new JwtAuthenticator(UserService.GetToken());
+            RestRequest requestOne = new RestRequest(TRANSFER_URL);
+            requestOne.AddJsonBody(newTransfer);
+            IRestResponse<Transfer> response = client.Post<Transfer>(requestOne);
+
+            if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)
+            {
+                ProcessErrorResponse(response);
+            }
+            else
+            {
+                return response.Data;
+            }
+            return response.Data;
+        }
+        public List<Transfer> GetTransfersForDisplay()
+        {
+            RestRequest requestOne = new RestRequest(TRANSFER_URL);
+            client.Authenticator = new JwtAuthenticator(UserService.GetToken());
+            IRestResponse<List<Transfer>> response = client.Get<List<Transfer>>(requestOne);
 
             if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)
             {

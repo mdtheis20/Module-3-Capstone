@@ -131,6 +131,21 @@ namespace TenmoClient
                     }
                     Console.WriteLine("Enter User Id: ");
                     int userId = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter amount to transfer:  ");
+                    decimal amount = Convert.ToDecimal(Console.ReadLine());
+                    int currentUser = UserService.GetUserId();
+                    NewTransfer newTransfer = new NewTransfer()
+                    {
+                        UserTo = userId,
+                        Amount = amount,
+                        UserFrom = currentUser,
+                        
+                    };
+                    if (newTransfer != null)
+                    {
+                        Transfer addedTransfer = apiService.AddTransfer(newTransfer);
+                    }
+                    
 
 
                 }

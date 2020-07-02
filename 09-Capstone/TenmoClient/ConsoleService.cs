@@ -71,6 +71,11 @@ namespace TenmoClient
             return pass;
         }
 
+        //public NewTransfer PromptForTransfer(TransferType transferType)
+        //{
+        //    Console.WriteLine($"Enter the User ID you are sending to);
+        //}
+
 
         public void PrintAccount(Account account)
         {
@@ -92,6 +97,16 @@ namespace TenmoClient
             Console.WriteLine("--------------------------------------------");
 
         }
+        //public void PrintTransfer(Transfer transfer)
+        //{
+        //    Console.WriteLine("--------------------------------------------");
+        //    Console.WriteLine("Transfer Successfull ");
+        //    Console.WriteLine("--------------------------------------------");
+        //    //Console.WriteLine(" Id: " + account.AccountId);
+        //    //Console.WriteLine(" User Id: " + account.UserId);
+        //    Console.WriteLine(" Balance: " + account.Balance);
+
+        //}
 
 
 
