@@ -118,6 +118,9 @@ namespace TenmoClient
                 }
                 else if (menuSelection == 4)
                 {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("Users: ");
                     List<User> users = apiService.GetUsersForDisplay();
                     if (users != null)
                     {
@@ -126,6 +129,9 @@ namespace TenmoClient
                             consoleService.PrintUser(u);
                         }
                     }
+                    Console.WriteLine("Please choose a user: ");
+                    Console.ReadLine();
+
 
                 }
                 else if (menuSelection == 5)
