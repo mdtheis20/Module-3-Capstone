@@ -20,6 +20,35 @@ namespace TenmoServer.DAO
         }
 
 
-        public Transfer CreateTransfer
+        public void CreateTransfer(int accountFromId, int accountToId, decimal amount)
+        {
+            Account obj = null;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("insert into transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) values(2, 2, @account_from, @account_to, @amount)", conn);
+                    cmd.Parameters.AddWithValue("@account_from ", accountFromId);
+                    cmd.Parameters.AddWithValue("@account_to ", accountToId);
+                    cmd.Parameters.AddWithValue("@amount ", amount);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    cmd.ExecuteNonQuery();
+
+                   cmd = new SqlCommand()
+
+                   
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            //return obj;
+            //    
+        }
     }
 }

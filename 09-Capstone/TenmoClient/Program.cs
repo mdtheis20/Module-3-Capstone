@@ -129,8 +129,8 @@ namespace TenmoClient
                             consoleService.PrintUser(u);
                         }
                     }
-                    Console.WriteLine("Please choose a user: ");
-                    Console.ReadLine();
+                    Console.WriteLine("Enter User Id: ");
+                    int userId = Convert.ToInt32(Console.ReadLine());
 
 
                 }
