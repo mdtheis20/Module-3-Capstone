@@ -1,5 +1,6 @@
 ﻿using RestSharp;
 using RestSharp.Authenticators;
+using System.Collections.Generic;
 using System.Net;
 using TenmoClient.Data;
 
@@ -10,6 +11,7 @@ namespace TenmoClient
 
         private readonly static string API_BASE_URL = "https://localhost:44315/";
         private readonly static string ACCOUNTS_URL = API_BASE_URL + "account";
+        private readonly static string USERS_URL = API_BASE_URL + "user";
         private readonly IRestClient client = new RestClient();
         private static API_User user = new API_User();
 
@@ -46,6 +48,24 @@ namespace TenmoClient
                 return response.Data;
             }
             return response.Data;
+        }
+
+        public List<User> GetUsersForDisplay()
+        {
+            RestRequest requestOne = new RestRequest(ACCOUNTS_URL);
+            client.Authenticator = new JwtAuthenticator(UserService.GetToken());
+            IRestResponse<List<User>> response = client.Get<List<User>>(requestOne);
+
+            if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)
+            {
+                ProcessErrorResponse(response);
+            }
+            else
+            {
+                return response.Data;
+            }
+            return response.Data;
+
         }
 
 

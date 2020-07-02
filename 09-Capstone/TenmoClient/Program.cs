@@ -118,7 +118,14 @@ namespace TenmoClient
                 }
                 else if (menuSelection == 4)
                 {
-                    // Send TE bucks
+                    List<User> users = apiService.GetUsersForDisplay();
+                    if (users != null)
+                    {
+                        foreach (User u in users)
+                        {
+                            consoleService.PrintUser(u);
+                        }
+                    }
 
                 }
                 else if (menuSelection == 5)

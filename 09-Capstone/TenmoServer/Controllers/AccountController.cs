@@ -16,6 +16,7 @@ namespace TenmoServer.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountDAO dao;
+        private readonly IUserDAO udao;
 
         public AccountController(IAccountDAO accountDao)
         {
@@ -29,6 +30,13 @@ namespace TenmoServer.Controllers
         {
             Account a = dao.GetAccount(User.Identity.Name);
             return Ok(a);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllRegisteredUsers()
+        {
+            List<User> userList = udao.GetUsers();
+                return Ok(userList);
         }
     }
 }

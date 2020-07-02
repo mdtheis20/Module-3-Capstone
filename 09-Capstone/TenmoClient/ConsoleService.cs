@@ -75,12 +75,22 @@ namespace TenmoClient
         public void PrintAccount(Account account)
         {
             Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("Account Details");
+            Console.WriteLine("Current Balance");
             Console.WriteLine("--------------------------------------------");
-            Console.WriteLine(" Id: " + account.AccountId);
-            Console.WriteLine(" User Id: " + account.UserId);
+            //Console.WriteLine(" Id: " + account.AccountId);
+            //Console.WriteLine(" User Id: " + account.UserId);
             Console.WriteLine(" Balance: " + account.Balance);
             
+        }
+        public void PrintUser(User user)
+        {
+           
+            
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine(" User Id: " + user.UserId);
+            Console.WriteLine(" Balance: " + user.Username);
+            Console.WriteLine("--------------------------------------------");
+
         }
 
 
