@@ -88,7 +88,7 @@ namespace TenmoClient
             
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine(" User Id: " + user.UserId);
-            Console.WriteLine(" Balance: " + user.Username);
+            Console.WriteLine(" Username: " + user.Username);
             Console.WriteLine("--------------------------------------------");
 
         }
