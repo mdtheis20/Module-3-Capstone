@@ -47,7 +47,46 @@ namespace TenmoServer.DAO
                 throw;
             }
 
-
+        }
+        public List<Transfer> GetTransfers(string username)
+        {
+            List<Transfer> transfers = new List<Transfer>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    const string QUERY = @"select uTO.username user_to, t.*, uFROm.username user_from FROM" +
+                        "transfers t JOIN accounts aTO ON aTO.account_id = aTO.user_id JOIN accounts aFROM ON a FROM.account_id = t.account_from" +
+                        "JOIN users uFROM ON uFROM.user_id = aFROM.user_id WHERE uTO.username = @userName OR uFROM.username = @userName";
+                    SqlCommand cmd = new SqlCommand(QUERY, conn);
+                    cmd.Parameters.AddWithValue("@userName", username);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Transfer transfer = ReadFromTransfers(reader);
+                        transfers.Add(transfer);
+                    }
+                    return transfers;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            
+        }
+        private Transfer ReadFromTransfers(SqlDataReader reader)
+        {
+            Transfer t = new Transfer();
+            t.TransferId = Convert.ToInt32(reader["transfer_id"]);
+            t.TransferTypeId = 2;
+            t.TransferStatusId = 2;
+            t.AccountFrom = Convert.ToInt32(reader["account_from"]);
+            t.AccountTo = Convert.ToInt32(reader["account_to"]);
+            t.Amount = Convert.ToDecimal(reader["amount"]);
+            return t;
+            
         }
     }
 }
