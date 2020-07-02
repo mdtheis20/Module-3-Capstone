@@ -52,7 +52,7 @@ namespace TenmoClient
 
         public List<User> GetUsersForDisplay()
         {
-            RestRequest requestOne = new RestRequest(ACCOUNTS_URL);
+            RestRequest requestOne = new RestRequest(USERS_URL);
             client.Authenticator = new JwtAuthenticator(UserService.GetToken());
             IRestResponse<List<User>> response = client.Get<List<User>>(requestOne);
 

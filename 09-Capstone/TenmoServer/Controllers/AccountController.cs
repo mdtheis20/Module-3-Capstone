@@ -18,25 +18,26 @@ namespace TenmoServer.Controllers
         private readonly IAccountDAO dao;
         private readonly IUserDAO udao;
 
-        public AccountController(IAccountDAO accountDao)
+        public AccountController(IAccountDAO accountDao, IUserDAO userDAO)
         {
             this.dao = accountDao;
+            this.udao = userDAO;
         }
-        
+
 
         [HttpGet]
-        
+
         public IActionResult GetCurrentAccountBalance()
         {
             Account a = dao.GetAccount(User.Identity.Name);
             return Ok(a);
         }
 
-        [HttpGet]
+        [HttpGet("User")]
         public IActionResult GetAllRegisteredUsers()
         {
             List<User> userList = udao.GetUsers();
-                return Ok(userList);
+            return Ok(userList);
         }
     }
 }
