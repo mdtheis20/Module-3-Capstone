@@ -36,10 +36,10 @@ namespace TenmoServer.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTransfer(Transfer transfer)  //THIS IS PROBABLY WRONG TOO
+        public ActionResult<Transfer> AddTransfer(Transfer transfer)  //THIS IS PROBABLY WRONG TOO
         {
-            Transfer transferAdded = tdao.CreateTransfer(transfer);
-            return Ok(transferAdded);
+            return tdao.CreateTransfer(transfer);
+            //return Ok(transferAdded);
         }
 
     }

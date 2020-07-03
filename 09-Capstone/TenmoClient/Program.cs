@@ -134,12 +134,14 @@ namespace TenmoClient
                     Console.WriteLine("Enter amount to transfer:  ");
                     decimal amount = Convert.ToDecimal(Console.ReadLine());
                     int currentUser = UserService.GetUserId();
-                    NewTransfer newTransfer = new NewTransfer()
+                    Transfer newTransfer = new Transfer()
                     {
-                        UserTo = userId,
+                        TransferTypeId = 2,
+                        AccountFrom = currentUser,
+                        AccountTo = userId,
+                        TransferStatusId = 2,
                         Amount = amount,
-                        UserFrom = currentUser,
-                        
+
                     };
                     if (newTransfer != null)
                     {

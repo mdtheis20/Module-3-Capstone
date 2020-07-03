@@ -69,12 +69,12 @@ namespace TenmoClient
 
         }
 
-        public Transfer AddTransfer(NewTransfer newTransfer)
+        public Transfer AddTransfer(Transfer transfer)
         {
             
             client.Authenticator = new JwtAuthenticator(UserService.GetToken());
             RestRequest requestOne = new RestRequest(TRANSFER_URL);
-            requestOne.AddJsonBody(newTransfer);
+            requestOne.AddJsonBody(transfer);
             IRestResponse<Transfer> response = client.Post<Transfer>(requestOne);
 
             if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)

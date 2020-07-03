@@ -19,7 +19,8 @@ namespace TenmoServer.DAO
             connectionString = dbConnectionString;
         }
 
-
+        const int startingTransferStatus = 2;
+        const decimal startingTransferType = 2;
         public Transfer CreateTransfer(Transfer transfer)
         {
             
@@ -28,7 +29,7 @@ namespace TenmoServer.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    const string QUERY = "Update accounts set balance = balance - @amount where account_id = @accountFrom Update accounts Set balance = balance + @amount where account_id = @accountTo insert into transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) values(@type, @status, @accountFrom, @accountTo, @amount) Select @@IDENTITY";
+                    const string QUERY = "Update accounts set balance = balance - @amount where account_id = @accountFrom Update accounts Set balance = balance + @amount where account_id = @accountTo Insert into transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) values(@type, @status, @accountFrom, @accountTo, @amount) Select @@IDENTITY";
 
                         
 
@@ -36,8 +37,8 @@ namespace TenmoServer.DAO
                     cmd.Parameters.AddWithValue("@accountFrom ", transfer.AccountFrom);
                     cmd.Parameters.AddWithValue("@accounTo ", transfer.AccountTo);
                     cmd.Parameters.AddWithValue("@amount ", transfer.Amount);
-                    cmd.Parameters.AddWithValue("@type ", transfer.TransferTypeId);
-                    cmd.Parameters.AddWithValue("@status ", transfer.TransferStatusId);
+                    cmd.Parameters.AddWithValue("@type ", startingTransferType);
+                    cmd.Parameters.AddWithValue("@status ", startingTransferStatus);
                     transfer.TransferId = Convert.ToInt32(cmd.ExecuteScalar());
                     return transfer;
                 }
