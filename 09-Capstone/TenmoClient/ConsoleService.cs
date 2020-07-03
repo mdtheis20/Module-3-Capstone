@@ -103,8 +103,10 @@ namespace TenmoClient
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine(" Sending User: " + transfer.AccountFrom);
             Console.WriteLine(" Receiving User: " + transfer.AccountTo);
-            Console.WriteLine(" amount: " + transfer.Amount);
+            Console.WriteLine(" Amount: " + transfer.Amount);
+            Console.WriteLine(" Transfer ID: " + transfer.TransferId);
             Console.WriteLine("--------------------------------------------");
+            
 
         }
 
