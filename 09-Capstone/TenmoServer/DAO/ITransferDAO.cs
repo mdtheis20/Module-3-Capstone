@@ -11,7 +11,8 @@ namespace TenmoServer.DAO
     {
         List<Transfer> GetTransfers(string username);
         Transfer CreateTransfer(Transfer transfer);
-       // Transfer ReadTransfers(SqlDataReader reader);
+        // Transfer ReadTransfers(SqlDataReader reader);
+        Transfer ShowTransferDetails(int transferId);
 
 
     }

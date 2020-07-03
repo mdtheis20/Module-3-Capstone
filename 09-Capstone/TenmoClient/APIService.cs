@@ -71,7 +71,7 @@ namespace TenmoClient
 
         public Transfer AddTransfer(Transfer transfer)
         {
-            
+
             client.Authenticator = new JwtAuthenticator(UserService.GetToken());
             RestRequest requestOne = new RestRequest(TRANSFER_URL);
             requestOne.AddJsonBody(transfer);
@@ -127,6 +127,22 @@ namespace TenmoClient
             return "";
         }
 
+        public Transfer GetTransfersDetails(int transferId)
+        {
+            RestRequest requestOne = new RestRequest(TRANSFER_URL);
+            client.Authenticator = new JwtAuthenticator(UserService.GetToken());
+            IRestResponse<Transfer> response = client.Get<Transfer>(requestOne);
+
+            if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)
+            {
+                ProcessErrorResponse(response);
+            }
+            else
+            {
+                return response.Data;
+            }
+            return response.Data;
 
         }
     }
+}

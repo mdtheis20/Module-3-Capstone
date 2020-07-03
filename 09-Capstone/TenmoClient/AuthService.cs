@@ -14,11 +14,6 @@ namespace TenmoClient
         private readonly IRestClient client = new RestClient();
         private static API_User user = new API_User();
 
-
-
-
-
-
         public AuthService()
         {
             client = new RestClient();

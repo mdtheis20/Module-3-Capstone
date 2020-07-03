@@ -93,5 +93,35 @@ namespace TenmoServer.DAO
             return t;
             
         }
+
+        public Transfer ShowTransferDetails(int transferId)
+        {
+            Transfer transfer = new Transfer();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    const string QUERY = @"select * from transfers t
+                                            JOIN transfer_types tt on t.transfer_type_id = tt.transfer_type_id
+                                            JOIN transfer_statuses ts on t.transfer_status_id = ts.transfer_status_id
+                                            WHERE t.transfer_id = @transferId";
+
+                    SqlCommand cmd = new SqlCommand(QUERY, conn);
+                    cmd.Parameters.AddWithValue("@transferId", transferId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        transfer = ReadFromTransfers(reader);
+                        
+                    }
+                    return transfer;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

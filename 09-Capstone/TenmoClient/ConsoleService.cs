@@ -85,12 +85,12 @@ namespace TenmoClient
             //Console.WriteLine(" Id: " + account.AccountId);
             //Console.WriteLine(" User Id: " + account.UserId);
             Console.WriteLine(" Balance: " + account.Balance);
-            
+
         }
         public void PrintUser(User user)
         {
-           
-            
+
+
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine(" User Id: " + user.UserId);
             Console.WriteLine(" Username: " + user.Username);
@@ -106,11 +106,22 @@ namespace TenmoClient
             Console.WriteLine(" Amount: " + transfer.Amount);
             Console.WriteLine(" Transfer ID: " + transfer.TransferId);
             Console.WriteLine("--------------------------------------------");
-            
-
         }
 
+        public void ShowTransferDetails(Transfer transfer)
+        {
+            string transferType = "Send";
+            string transferStatus = "Approved"; //IM SO SORRY
 
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine(" Id: " + transfer.TransferId);
+            Console.WriteLine(" From: " + transfer.AccountFrom);
+            Console.WriteLine(" To: " + transfer.AccountTo);
+            Console.WriteLine(" Type: " + transferType);
+            Console.WriteLine(" Status: " + transferStatus);
+            Console.WriteLine(" Amount: " + transfer.Amount);
+            Console.WriteLine("--------------------------------------------");
 
+        }
     }
 }
