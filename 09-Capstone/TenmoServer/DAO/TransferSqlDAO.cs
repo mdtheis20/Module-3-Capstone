@@ -57,9 +57,9 @@ namespace TenmoServer.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    const string QUERY = @"select uTO.username user_to, t.*, uFROm.username user_from FROM" +
-                        "transfers t JOIN accounts aTO ON aTO.account_id = aTO.user_id JOIN accounts aFROM ON a FROM.account_id = t.account_from" +
-                        "JOIN users uFROM ON uFROM.user_id = aFROM.user_id WHERE uTO.username = @userName OR uFROM.username = @userName";
+                    const string QUERY = @"select uTO.username user_to, t.*, uFROM.username user_from FROM transfers t JOIN accounts aTO ON aTO.account_id = aTO.user_id JOIN accounts aFROM ON aFROM.account_id = t.account_from JOIN users uFROM ON uFROM.user_id = aFROM.user_id WHERE uTO.username = @userName OR uFROM.username = @userName";
+                        //"transfers t JOIN accounts aTO ON aTO.account_id = aTO.user_id JOIN accounts aFROM ON a FROM.account_id = t.account_from" +
+                        //"JOIN users uFROM ON uFROM.user_id = aFROM.user_id WHERE uTO.username = @userName OR uFROM.username = @userName";
                     SqlCommand cmd = new SqlCommand(QUERY, conn);
                     cmd.Parameters.AddWithValue("@userName", username);
                     SqlDataReader reader = cmd.ExecuteReader();

@@ -97,16 +97,16 @@ namespace TenmoClient
             Console.WriteLine("--------------------------------------------");
 
         }
-        //public void PrintTransfer(Transfer transfer)
-        //{
-        //    Console.WriteLine("--------------------------------------------");
-        //    Console.WriteLine("Transfer Successfull ");
-        //    Console.WriteLine("--------------------------------------------");
-        //    //Console.WriteLine(" Id: " + account.AccountId);
-        //    //Console.WriteLine(" User Id: " + account.UserId);
-        //    Console.WriteLine(" Balance: " + account.Balance);
+        public void PrintTransfer(Transfer transfer)
+        {
 
-        //}
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine(" Sending User: " + transfer.AccountFrom);
+            Console.WriteLine(" Receiving User: " + transfer.AccountTo);
+            Console.WriteLine(" amount: " + transfer.Amount);
+            Console.WriteLine("--------------------------------------------");
+
+        }
 
 
 
