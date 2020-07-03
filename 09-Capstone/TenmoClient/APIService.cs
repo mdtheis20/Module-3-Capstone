@@ -127,11 +127,11 @@ namespace TenmoClient
             return "";
         }
 
-        public Transfer GetTransfersDetails(int transferId)
+        public List<Transfer> GetTransfersDetails(int transferId)
         {
             RestRequest requestOne = new RestRequest(TRANSFER_URL);
             client.Authenticator = new JwtAuthenticator(UserService.GetToken());
-            IRestResponse<Transfer> response = client.Get<Transfer>(requestOne);
+            IRestResponse<List<Transfer>> response = client.Get<List<Transfer>>(requestOne);
 
             if (response.ResponseStatus != ResponseStatus.Completed || response.IsSuccessful)
             {

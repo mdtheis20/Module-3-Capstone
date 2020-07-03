@@ -14,6 +14,7 @@ namespace TenmoClient.Data
         public int AccountFrom { get; set; }
         public int AccountTo { get; set; }
         public decimal Amount { get; set; }
+        public string Username { get; set; }
     }
     public class NewTransfer
     {

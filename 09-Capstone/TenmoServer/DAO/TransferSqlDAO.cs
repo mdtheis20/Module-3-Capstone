@@ -105,7 +105,13 @@ namespace TenmoServer.DAO
                     const string QUERY = @"select * from transfers t
                                             JOIN transfer_types tt on t.transfer_type_id = tt.transfer_type_id
                                             JOIN transfer_statuses ts on t.transfer_status_id = ts.transfer_status_id
+                                            JOIN accounts a on t.account_from = a.account_id
+                                            JOIN users u on a.user_id = u.user_id
                                             WHERE t.transfer_id = @transferId";
+                    //const string QUERY = @"select * from transfers t
+                    //                        JOIN transfer_types tt on t.transfer_type_id = tt.transfer_type_id
+                    //                        JOIN transfer_statuses ts on t.transfer_status_id = ts.transfer_status_id
+                    //                        WHERE t.transfer_id = @transferId";
 
                     SqlCommand cmd = new SqlCommand(QUERY, conn);
                     cmd.Parameters.AddWithValue("@transferId", transferId);

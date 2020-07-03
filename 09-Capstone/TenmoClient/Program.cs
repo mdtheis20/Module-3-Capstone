@@ -124,17 +124,14 @@ namespace TenmoClient
                     Console.WriteLine();
                     Console.WriteLine("Enter Transfer Id to show details");
                     int input = Convert.ToInt32(Console.ReadLine());
-                    Transfer transferDetails = apiService.GetTransfersDetails(input);
+                    List<Transfer> transferDetails = apiService.GetTransfersDetails(input);
+                    if (transferDetails != null)
                     {
-                        consoleService.ShowTransferDetails(transferDetails);
+                        foreach (Transfer t in transferDetails)
+                        {
+                            consoleService.ShowTransferDetails(t);
+                        }
                     }
-                    //if (transferDetails != null)
-                    //{
-                    //    foreach (Transfer t in transferDetails)
-                    //    {
-                    //       consoleService.ShowTransferDetails(t);
-                    //    }
-                    //}
 
 
                 }
