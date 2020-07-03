@@ -13,10 +13,10 @@ namespace TenmoClient.Data
 
 
 
-        public Account()
-        {
+        //public Account()
+        //{
 
-        }
+        //}
     }
 
 

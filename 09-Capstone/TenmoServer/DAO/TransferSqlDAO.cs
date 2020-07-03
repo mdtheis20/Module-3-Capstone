@@ -23,7 +23,7 @@ namespace TenmoServer.DAO
         const decimal startingTransferType = 2;
         public Transfer CreateTransfer(Transfer transfer)
         {
-            
+            Transfer newTransfer = new Transfer();
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -35,12 +35,12 @@ namespace TenmoServer.DAO
 
                     SqlCommand cmd = new SqlCommand(QUERY, conn);
                     cmd.Parameters.AddWithValue("@accountFrom ", transfer.AccountFrom);
-                    cmd.Parameters.AddWithValue("@accounTo ", transfer.AccountTo);
+                    cmd.Parameters.AddWithValue("@accountTo ", transfer.AccountTo);
                     cmd.Parameters.AddWithValue("@amount ", transfer.Amount);
                     cmd.Parameters.AddWithValue("@type ", startingTransferType);
                     cmd.Parameters.AddWithValue("@status ", startingTransferStatus);
                     transfer.TransferId = Convert.ToInt32(cmd.ExecuteScalar());
-                    return transfer;
+                    return newTransfer;
                 }
             }
             catch (SqlException)
