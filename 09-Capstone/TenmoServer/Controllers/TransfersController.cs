@@ -42,7 +42,7 @@ namespace TenmoServer.Controllers
             //return Ok(transferAdded);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{transferid}")]
         public ActionResult<Transfer> ShowTransfers(int transferId)
         {
             Transfer transfer = tdao.ShowTransferDetails(transferId);

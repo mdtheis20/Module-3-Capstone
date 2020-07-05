@@ -13,6 +13,7 @@ namespace TenmoClient
         private readonly static string ACCOUNTS_URL = API_BASE_URL + "account";
         private readonly static string USERS_URL = ACCOUNTS_URL + "/" + "user";
         private readonly static string TRANSFER_URL = API_BASE_URL + "transfers";
+        private readonly static string TRANSFERID_URL = TRANSFER_URL + "/" + "id";
         private readonly IRestClient client = new RestClient();
         private static API_User user = new API_User();
 
@@ -129,7 +130,7 @@ namespace TenmoClient
 
         public List<Transfer> GetTransfersDetails(int transferId)
         {
-            RestRequest requestOne = new RestRequest(TRANSFER_URL);
+            RestRequest requestOne = new RestRequest(TRANSFER_URL + "/" + transferId);
             client.Authenticator = new JwtAuthenticator(UserService.GetToken());
             IRestResponse<List<Transfer>> response = client.Get<List<Transfer>>(requestOne);
 

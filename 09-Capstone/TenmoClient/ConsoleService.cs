@@ -115,7 +115,7 @@ namespace TenmoClient
 
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine(" Id: " + transfer.TransferId);
-            Console.WriteLine(" From: " + transfer.Username);
+            Console.WriteLine(" From: " + transfer.AccountFrom);
             Console.WriteLine(" To: " + transfer.AccountTo);
             Console.WriteLine(" Type: " + transferType);
             Console.WriteLine(" Status: " + transferStatus);
