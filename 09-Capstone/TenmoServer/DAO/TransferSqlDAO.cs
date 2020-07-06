@@ -24,12 +24,13 @@ namespace TenmoServer.DAO
         public Transfer CreateTransfer(Transfer transfer)
         {
             Transfer newTransfer = new Transfer();
+            
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    const string QUERY = "Update accounts set balance = balance - @amount where account_id = @accountFrom Update accounts Set balance = balance + @amount where account_id = @accountTo Insert into transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) values(@type, @status, @accountFrom, @accountTo, @amount) Select @@IDENTITY";
+                    const string QUERY = "Update accounts set balance = balance - @amount where account_id = @accountFrom and balance > @amount Update accounts Set balance = balance + @amount where account_id = @accountTo Insert into transfers(transfer_type_id, transfer_status_id, account_from, account_to, amount) values(@type, @status, @accountFrom, @accountTo, @amount) Select @@IDENTITY";
 
                         
 

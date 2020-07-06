@@ -33,6 +33,9 @@ namespace TenmoServer.Controllers
             List<Transfer> transferList = tdao.GetTransfers(User.Identity.Name);  ///DANGERZONE THIS IS WRONG//PROBABLY
             return Ok(transferList);
 
+         
+            
+            
         }
 
         [HttpPost]
